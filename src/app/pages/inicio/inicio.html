@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="card hero">
+    <h1 class="h1">Bienvenido 👋</h1>
+    <p class="muted">Explora episodios, personajes y continúa donde te quedaste.</p>
+
+    <div class="grid-2" style="margin-top:14px;">
+      <a class="card quick" routerLink="/episodios">📺 Episodios</a>
+      <a class="card quick" routerLink="/personajes">🧑‍🤝‍🧑 Personajes</a>
+      <a class="card quick" routerLink="/reproductor">▶ Reproductor</a>
+      <a class="card quick" routerLink="/perfil">⚙ Perfil</a>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;">
+    <div class="h2">Continuar viendo</div>
+
+    <a class="card row" *ngFor="let item of continuar" routerLink="/reproductor" [queryParams]="{ ep: item.id }">
+      <div>
+        <div class="row__title">{{ item.titulo }}</div>
+        <div class="muted small">{{ item.meta }}</div>
+      </div>
+      <div class="row__pill">{{ item.progreso }}%</div>
+    </a>
+  </div>
+</div>
+

@@ -1,0 +1,58 @@
+<div class="pd">
+  <header class="pd_top">
+    <a class="pd_back" routerLink="/personajes">←</a>
+    <div class="pd_title">{{ personaje().name }}</div>
+    <button class="pd_fav" type="button">★</button>
+  </header>
+
+  <div class="pd_card">
+    <div class="pd_avatarWrap">
+      <img class="pd_avatar" [src]="personaje().image" [alt]="personaje().name" />
+    </div>
+
+    <div class="pd_info">
+      <span class="pd_badge">{{ personaje().name }}</span>
+      <h2 class="pd_headline">{{ personaje().tagline }}</h2>
+      <p class="pd_meta">{{ personaje().meta1 }}</p>
+      <p class="pd_meta">{{ personaje().meta2 }}</p>
+    </div>
+
+    <nav class="pd_tabs">
+      <button type="button" class="pd_tab" [class.isActive]="tab()==='perfil'" (click)="tab.set('perfil')">Perfil</button>
+      <button type="button" class="pd_tab" [class.isActive]="tab()==='momentos'" (click)="tab.set('momentos')">Momentos</button>
+      <button type="button" class="pd_tab" [class.isActive]="tab()==='relaciones'" (click)="tab.set('relaciones')">Relaciones</button>
+    </nav>
+  </div>
+
+  <section class="pd_section" *ngIf="tab()==='perfil'">
+    <h3 class="pd_h3">Perfil</h3>
+    <div class="pd_box">
+      <p class="pd_p">{{ personaje().profileText }}</p>
+    </div>
+  </section>
+
+  <section class="pd_section" *ngIf="tab()==='momentos'">
+    <h3 class="pd_h3">Momentos destacados</h3>
+    <div class="pd_moments">
+      <a class="pd_moment" *ngFor="let m of personaje().moments">
+        <img class="pd_momentImg" [src]="m.thumb" [alt]="m.id" />
+        <span class="pd_play">▶</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="pd_section" *ngIf="tab()==='relaciones'">
+    <h3 class="pd_h3">Relaciones</h3>
+
+    <div class="pd_list">
+      <a class="pd_row" *ngFor="let r of relaciones()" [routerLink]="['/personajes', r.id]">
+        <img class="pd_rowAvatar" [src]="r.character?.image" [alt]="r.character?.name ?? ''" />
+        <div class="pd_rowText">
+          <div class="pd_rowName">{{ r.character?.name }}</div>
+          <div class="pd_rowNote">{{ r.note }}</div>
+        </div>
+        <div class="pd_chev">›</div>
+      </a>
+    </div>
+  </section>
+</div>

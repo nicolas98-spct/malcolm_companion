@@ -1,0 +1,28 @@
+<div class="auth">
+  <div class="auth__card card">
+    <h1 class="h1">Malcolm Companion</h1>
+    <p class="muted">Inicia sesión para continuar</p>
+
+    <label class="field">
+      <span>Correo</span>
+      <input class="input" type="email"
+        [value]="email()"
+        (input)="email.set(($any($event.target)).value)"
+        placeholder="tu@email.com" />
+    </label>
+
+    <label class="field">
+      <span>Contraseña</span>
+      <input class="input" type="password"
+        [value]="password()"
+        (input)="password.set(($any($event.target)).value)"
+        placeholder="••••••••" />
+    </label>
+
+    <button class="btn btn--primary" (click)="entrar()" [disabled]="loading()">
+      {{ loading() ? 'Entrando…' : 'Entrar' }}
+    </button>
+
+    <p class="muted small" style="margin-top:10px;">Demo: sin validación real.</p>
+  </div>
+</div>

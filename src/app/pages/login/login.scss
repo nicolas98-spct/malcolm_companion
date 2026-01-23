@@ -1,0 +1,11 @@
+.auth{
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding: 16px;
+}
+.auth__card{
+  width:min(420px, 100%);
+  padding: 18px;
+}
+
