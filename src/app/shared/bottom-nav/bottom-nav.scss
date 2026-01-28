@@ -6,15 +6,16 @@
   width: min(420px, calc(100% - 24px));
   height: 58px;
 
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 18px;
+  background: rgba(19, 22, 35, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
 
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35);
   z-index: 1000;
 }
 
@@ -23,7 +24,7 @@
   display: grid;
   place-items: center;
   text-decoration: none;
-  color: rgba(0, 0, 0, 0.35);
+  color: var(--muted);
   font-weight: 800;
   -webkit-tap-highlight-color: transparent;
 }
@@ -39,10 +40,10 @@
 }
 
 .nav-item.active {
-  color: #ef3a2f;
+  color: var(--accent);
 }
 
 .nav-item.active .ico {
-  background: rgba(239, 58, 47, 0.12);
-  color: #ef3a2f;
+  background: var(--accent-soft);
+  color: var(--accent);
 }
