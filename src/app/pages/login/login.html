@@ -1,28 +1,49 @@
-<div class="auth">
-  <div class="auth__card card">
-    <h1 class="h1">Malcolm Companion</h1>
-    <p class="muted">Inicia sesión para continuar</p>
+<div class="login">
+  <div class="login__wall" aria-hidden="true"></div>
+  <div class="login__overlay">
+    <div class="login__brand">MALCOM VERSE</div>
 
-    <label class="field">
-      <span>Correo</span>
-      <input class="input" type="email"
-        [value]="email()"
-        (input)="email.set(($any($event.target)).value)"
-        placeholder="tu@email.com" />
-    </label>
+    <div class="login__card">
+      <h1 class="login__title">Log in</h1>
+      <p class="login__subtitle">Inicia sesión para continuar</p>
 
-    <label class="field">
-      <span>Contraseña</span>
-      <input class="input" type="password"
-        [value]="password()"
-        (input)="password.set(($any($event.target)).value)"
-        placeholder="••••••••" />
-    </label>
+      <label class="login__field">
+        <span>Correo</span>
+        <input
+          class="login__input"
+          type="email"
+          [value]="email()"
+          (input)="email.set(($any($event.target)).value)"
+          placeholder="tu@email.com"
+        />
+      </label>
 
-    <button class="btn btn--primary" (click)="entrar()" [disabled]="loading()">
-      {{ loading() ? 'Entrando…' : 'Entrar' }}
-    </button>
+      <label class="login__field">
+        <span>Contraseña</span>
+        <input
+          class="login__input"
+          type="password"
+          [value]="password()"
+          (input)="password.set(($any($event.target)).value)"
+          placeholder="••••••••"
+        />
+      </label>
 
-    <p class="muted small" style="margin-top:10px;">Demo: sin validación real.</p>
+      <button class="login__cta" (click)="entrar()" [disabled]="loading()">
+        {{ loading() ? 'Entrando…' : 'Iniciar sesión' }}
+      </button>
+
+      <div class="login__divider">
+        <span>o</span>
+      </div>
+
+      <button class="login__google" type="button">
+        <span class="login__google-icon">G</span>
+        Continuar con Google
+      </button>
+
+      <p class="login__demo">Demo: sin validación real.</p>
+      <a class="login__register" href="#">Regístrate</a>
+    </div>
   </div>
 </div>

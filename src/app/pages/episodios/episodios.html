@@ -1,1 +1,29 @@
-<p>episodios works!</p>
+<div class="page episodes">
+  <header class="page__header">
+    <div>
+      <h1 class="page__title">Episodios</h1>
+      <p class="page__subtitle">Sigue la serie episodio por episodio.</p>
+    </div>
+    <button class="episodes__search" type="button">🔍</button>
+  </header>
+
+  <section class="episodes__filters">
+    <button class="chip isActive" type="button">Todos</button>
+    <button class="chip" type="button" *ngFor="let filtro of filtros.slice(1)">{{ filtro }}</button>
+  </section>
+
+  <section class="episodes__list">
+    <article class="episodes__card" *ngFor="let ep of episodios">
+      <div class="episodes__thumb" [style.background-image]="'url(' + ep.thumb + ')'"></div>
+      <div class="episodes__info">
+        <div class="episodes__meta">{{ ep.temporada }} · {{ ep.duracion }}</div>
+        <h3 class="episodes__title">{{ ep.titulo }}</h3>
+        <p class="episodes__desc">{{ ep.descripcion }}</p>
+        <div class="episodes__progress">
+          <div class="episodes__progress-bar" [style.width.%]="ep.progreso"></div>
+        </div>
+      </div>
+      <button class="episodes__play" type="button">▶</button>
+    </article>
+  </section>
+</div>

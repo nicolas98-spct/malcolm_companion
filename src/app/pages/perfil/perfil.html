@@ -1,1 +1,35 @@
-<p>perfil works!</p>
+<div class="page profile">
+  <header class="page__header">
+    <div>
+      <h1 class="page__title">Perfil</h1>
+      <p class="page__subtitle">Administra tu cuenta y preferencias.</p>
+    </div>
+    <button class="profile__edit" type="button">✎</button>
+  </header>
+
+  <section class="profile__card">
+    <div class="profile__avatar"></div>
+    <div>
+      <div class="profile__name">Malcolm Wilkerson</div>
+      <div class="profile__email">malcolm@verse.app</div>
+      <span class="pill">Cuenta premium</span>
+    </div>
+  </section>
+
+  <section class="profile__stats">
+    <div class="profile__stat" *ngFor="let stat of stats">
+      <div class="profile__stat-value">{{ stat.value }}</div>
+      <div class="profile__stat-label">{{ stat.label }}</div>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="section-title">Preferencias</h3>
+    <div class="profile__settings">
+      <div class="profile__setting" *ngFor="let item of ajustes">
+        <span>{{ item.label }}</span>
+        <span class="profile__setting-value">{{ item.value }}</span>
+      </div>
+    </div>
+  </section>
+</div>

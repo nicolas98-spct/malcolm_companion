@@ -1,1 +1,20 @@
-<p>personajes works!</p>
+<div class="page characters">
+  <header class="page__header">
+    <div>
+      <h1 class="page__title">Personajes</h1>
+      <p class="page__subtitle">Conoce a cada integrante de la familia.</p>
+    </div>
+    <button class="characters__filter" type="button">⚡</button>
+  </header>
+
+  <section class="characters__grid">
+    <a class="characters__card" *ngFor="let personaje of personajes" [routerLink]="['/personajes', personaje.id]">
+      <div class="characters__image" [style.background-image]="'url(' + personaje.image + ')'"></div>
+      <div class="characters__body">
+        <div class="characters__name">{{ personaje.name }}</div>
+        <div class="characters__tagline">{{ personaje.tagline }}</div>
+        <div class="characters__pill">{{ personaje.meta1 }}</div>
+      </div>
+    </a>
+  </section>
+</div>
