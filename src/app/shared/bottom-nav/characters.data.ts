@@ -37,11 +37,11 @@ export const CHARACTERS: Character[] = [
     profileTitle: 'Perfil',
     profileText:
       'Malcolm es el hijo del medio y el protagonista de la serie. Tiene un coeficiente intelectual altísimo y, gracias a eso, asiste a un programa para alumnos superdotados, aunque muchas veces preferiría ser “normal”.\n\nEs analítico, sarcástico y cuestiona todo, vive frustrado entre las expectativas académicas y su vida familiar. A pesar de sus quejas, suele terminar ayudando a los demás y tratando de salir de los problemas como pueda.',
-    image: '/assets/characters/malcolm.jpg',
+    image: '/assets/malcolm.jpg',
     moments: [
-      { id: 'm1', title: 'Momento', thumb: '/assets/characters/malcolm.jpg' },
-      { id: 'm2', title: 'Momento', thumb: '/assets/characters/malcolm.jpg' },
-      { id: 'm3', title: 'Momento', thumb: '/assets/characters/malcolm.jpg' },
+      { id: 'm1', title: 'Momento', thumb: '/assets/malcolm.jpg' },
+      { id: 'm2', title: 'Momento', thumb: '/assets/malcolm.jpg' },
+      { id: 'm3', title: 'Momento', thumb: '/assets/malcolm.jpg' },
     ],
     relations: [
       { id: 2, note: 'Hermano mayor rebelde.' },
@@ -59,11 +59,11 @@ export const CHARACTERS: Character[] = [
     profileTitle: 'Perfil',
     profileText:
       'Francis es el hijo mayor. Vive escapando de las reglas de Lois y busca su propio camino. Aunque parezca irresponsable, tiene un gran corazón y aprende a golpe de experiencias.',
-    image: '/assets/characters/francis.jpg',
+    image: '/assets/francis.jpg',
     moments: [
-      { id: 'm1', title: 'Momento', thumb: '/assets/characters/francis.jpg' },
-      { id: 'm2', title: 'Momento', thumb: '/assets/characters/francis.jpg' },
-      { id: 'm3', title: 'Momento', thumb: '/assets/characters/francis.jpg' },
+      { id: 'm1', title: 'Momento', thumb: '/assets/francis.jpg' },
+      { id: 'm2', title: 'Momento', thumb: '/assets/francis.jpg' },
+      { id: 'm3', title: 'Momento', thumb: '/assets/francis.jpg' },
     ],
     relations: [
       { id: 1, note: 'Hermano menor brillante.' },
@@ -80,11 +80,11 @@ export const CHARACTERS: Character[] = [
     profileTitle: 'Perfil',
     profileText:
       'Reese es el hermano que resuelve todo con fuerza y cero filtro. Aunque parece simple, tiene talentos ocultos (por ejemplo, cocina) y momentos de inesperada lucidez.',
-    image: '/assets/characters/reese.jpg',
+    image: '/assets/reese.jpg',
     moments: [
-      { id: 'm1', title: 'Momento', thumb: '/assets/characters/reese.jpg' },
-      { id: 'm2', title: 'Momento', thumb: '/assets/characters/reese.jpg' },
-      { id: 'm3', title: 'Momento', thumb: '/assets/characters/reese.jpg' },
+      { id: 'm1', title: 'Momento', thumb: '/assets/reese.jpg' },
+      { id: 'm2', title: 'Momento', thumb: '/assets/reese.jpg' },
+      { id: 'm3', title: 'Momento', thumb: '/assets/reese.jpg' },
     ],
     relations: [
       { id: 1, note: 'Rivalidad constante.' },
@@ -101,11 +101,11 @@ export const CHARACTERS: Character[] = [
     profileTitle: 'Perfil',
     profileText:
       'Dewey parece “el pequeño”, pero entiende más de lo que todos creen. Es artístico, observador y suele tener la última palabra sin levantar la voz.',
-    image: '/assets/characters/dewey.jpg',
+    image: '/assets/dewey.jpg',
     moments: [
-      { id: 'm1', title: 'Momento', thumb: '/assets/characters/dewey.jpg' },
-      { id: 'm2', title: 'Momento', thumb: '/assets/characters/dewey.jpg' },
-      { id: 'm3', title: 'Momento', thumb: '/assets/characters/dewey.jpg' },
+      { id: 'm1', title: 'Momento', thumb: '/assets/dewey.jpg' },
+      { id: 'm2', title: 'Momento', thumb: '/assets/dewey.jpg' },
+      { id: 'm3', title: 'Momento', thumb: '/assets/dewey.jpg' },
     ],
     relations: [
       { id: 1, note: 'Conexión silenciosa.' },
@@ -122,11 +122,11 @@ export const CHARACTERS: Character[] = [
     profileTitle: 'Perfil',
     profileText:
       'Lois es la fuerza de la casa. Controla el caos como puede. Puede parecer dura, pero su amor se nota en cómo sostiene a su familia cuando todo explota.',
-    image: '/assets/characters/lois.jpg',
+    image: '/assets/lois.jpg',
     moments: [
-      { id: 'm1', title: 'Momento', thumb: '/assets/characters/lois.jpg' },
-      { id: 'm2', title: 'Momento', thumb: '/assets/characters/lois.jpg' },
-      { id: 'm3', title: 'Momento', thumb: '/assets/characters/lois.jpg' },
+      { id: 'm1', title: 'Momento', thumb: '/assets/lois.jpg' },
+      { id: 'm2', title: 'Momento', thumb: '/assets/lois.jpg' },
+      { id: 'm3', title: 'Momento', thumb: '/assets/lois.jpg' },
     ],
     relations: [
       { id: 6, note: 'Su pareja.' },
@@ -143,11 +143,11 @@ export const CHARACTERS: Character[] = [
     profileTitle: 'Perfil',
     profileText:
       'Hal es el adulto niño del hogar. Ama a su familia con intensidad, a veces exagera todo, pero siempre está ahí cuando lo necesitan.',
-    image: '/assets/characters/hal.jpg',
+    image: '/assets/hal.jpg',
     moments: [
-      { id: 'm1', title: 'Momento', thumb: '/assets/characters/hal.jpg' },
-      { id: 'm2', title: 'Momento', thumb: '/assets/characters/hal.jpg' },
-      { id: 'm3', title: 'Momento', thumb: '/assets/characters/hal.jpg' },
+      { id: 'm1', title: 'Momento', thumb: '/assets/hal.jpg' },
+      { id: 'm2', title: 'Momento', thumb: '/assets/hal.jpg' },
+      { id: 'm3', title: 'Momento', thumb: '/assets/hal.jpg' },
     ],
     relations: [
       { id: 5, note: 'Su pareja.' },
