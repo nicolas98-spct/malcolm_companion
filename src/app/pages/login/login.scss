@@ -13,8 +13,9 @@
 .login__wall {
   position: absolute;
   inset: 0;
-  background-image: url('/assets/malcolm.jpg'), url('/assets/lois.jpg'), url('/assets/reese.jpg'),
-    url('/assets/francis.jpg'), url('/assets/hal.jpg'), url('/assets/dewey.jpg');
+  background-image: url('/assets/characters/malcolm.jpg'), url('/assets/characters/lois.jpg'),
+    url('/assets/characters/reese.jpg'), url('/assets/characters/francis.jpg'),
+    url('/assets/characters/hal.jpg'), url('/assets/characters/dewey.jpg');
   background-size: 58% 40%, 42% 30%, 46% 34%, 48% 38%, 52% 36%, 44% 32%;
   background-position: 70% 12%, 8% 8%, 8% 78%, 80% 72%, 10% 44%, 86% 45%;
   background-repeat: no-repeat;
