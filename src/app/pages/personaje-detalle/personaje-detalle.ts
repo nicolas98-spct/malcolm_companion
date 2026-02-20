@@ -2,7 +2,8 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import { CHARACTERS, type Character, type CharacterId } from '../../shared/bottom-nav/characters.data';
+import type { Character, CharacterId } from '../../shared/bottom-nav/characters.data';
+import { CharacterService } from '../../services/character.service';
 
 type TabKey = 'perfil' | 'momentos' | 'relaciones';
 
@@ -15,21 +16,14 @@ type TabKey = 'perfil' | 'momentos' | 'relaciones';
 })
 export class PersonajeDetalleComponent {
   private route = inject(ActivatedRoute);
+  private characterService = inject(CharacterService);
 
   tab = signal<TabKey>('perfil');
 
   id = computed(() => Number(this.route.snapshot.paramMap.get('id') ?? 1) as CharacterId);
 
-  personaje = computed<Character>(() => {
-    return CHARACTERS.find((c: Character) => c.id === this.id()) ?? CHARACTERS[0];
-  });
+  personaje = computed<Character>(() => this.characterService.getCharacterById(this.id()));
 
-  relaciones = computed(() => {
-    const p = this.personaje();
-    return p.relations.map((r) => ({
-      ...r,
-      character: CHARACTERS.find((c: Character) => c.id === r.id),
-    }));
-  });
+  relaciones = computed(() => this.characterService.getRelationsForCharacter(this.id()));
 }
 

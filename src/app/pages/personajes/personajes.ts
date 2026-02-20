@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CHARACTERS } from '../../shared/bottom-nav/characters.data';
+import { CharacterService } from '../../services/character.service';
 
 @Component({
   selector: 'app-personajes',
@@ -11,5 +11,8 @@ import { CHARACTERS } from '../../shared/bottom-nav/characters.data';
   styleUrl: './personajes.scss',
 })
 export class Personajes {
-  readonly personajes = CHARACTERS;
+  private characterService = inject(CharacterService);
+
+  readonly personajes = this.characterService.getAllCharacters();
 }
+

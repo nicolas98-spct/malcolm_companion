@@ -48,6 +48,13 @@ export const routes: Routes = [
             m.PersonajeDetalleComponent ?? m.PersonajeDetalle ?? m.PersonajeDetallePage ?? m.default
           ),
       },
+
+      {
+        path: 'laboratorio',
+        loadComponent: () =>
+          import('./pages/laboratorio/laboratorio').then((m: any) => m.Laboratorio ?? m.default),
+      },
+
       {
         path: 'perfil',
         loadComponent: () =>
