@@ -15,3 +15,4 @@ export class Personajes {
 
   readonly personajes = this.characterService.getAllCharacters();
 }
+

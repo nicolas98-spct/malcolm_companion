@@ -1,0 +1,46 @@
+<div class="screen register">
+  <div class="bg"></div>
+
+  <div class="content">
+    <div class="phone">
+      <div class="logo">
+        <h2 class="brand">MALCOMVERSE</h2>
+      </div>
+
+     
+       <mat-card class="card dark-card">
+
+
+
+        <h1>Registro</h1>
+
+        <div class="msg error" *ngIf="errorMsg">{{ errorMsg }}</div>
+        <div class="msg ok" *ngIf="successMsg">{{ successMsg }}</div>
+
+        <label>Nombres *</label>
+        <mat-form-field appearance="outline" class="full">
+          <input matInput [(ngModel)]="form.names" name="names" />
+        </mat-form-field>
+
+        <label>Correo *</label>
+        <mat-form-field appearance="outline" class="full">
+          <input matInput [(ngModel)]="form.email" name="email" type="email" />
+        </mat-form-field>
+
+        <label>Edad *</label>
+        <mat-form-field appearance="outline" class="full">
+          <input matInput [(ngModel)]="form.age" name="age" type="number" min="1" />
+        </mat-form-field>
+
+        <button mat-flat-button class="btn-primary" (click)="submit()" [disabled]="loading">
+          {{ loading ? 'Registrando...' : 'Crear cuenta' }}
+        </button>
+
+        <div class="footer">
+          <span>¿Ya tienes cuenta?</span>
+          <a routerLink="/login">Inicia sesión</a>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

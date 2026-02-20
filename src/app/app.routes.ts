@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { Shell } from './layout/shell/shell';
+import { RegisterComponent } from './pages/register/register';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,6 +23,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/inicio/inicio').then((m: any) => m.InicioComponent ?? m.Inicio ?? m.default),
       },
+      { path: 'register', component: RegisterComponent },
       {
         path: 'episodios',
         loadComponent: () =>
