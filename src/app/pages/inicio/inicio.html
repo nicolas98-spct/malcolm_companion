@@ -1,26 +1,63 @@
-<div class="container">
-  <div class="card hero">
-    <h1 class="h1">Bienvenido 👋</h1>
-    <p class="muted">Explora episodios, personajes y continúa donde te quedaste.</p>
-
-    <div class="grid-2" style="margin-top:14px;">
-      <a class="card quick" routerLink="/episodios">📺 Episodios</a>
-      <a class="card quick" routerLink="/personajes">🧑‍🤝‍🧑 Personajes</a>
-      <a class="card quick" routerLink="/reproductor">▶ Reproductor</a>
-      <a class="card quick" routerLink="/perfil">⚙ Perfil</a>
+<div class="page home">
+  <header class="page__header">
+    <div>
+      <p class="home__eyebrow">Malcom Verse</p>
+      <h1 class="page__title">Hola, vuelve a la serie 👋</h1>
+      <p class="page__subtitle">Explora episodios, personajes y retoma donde lo dejaste.</p>
     </div>
-  </div>
+    <div class="home__avatar">MV</div>
+  </header>
 
-  <div style="margin-top:14px;">
-    <div class="h2">Continuar viendo</div>
+  <section class="card home__hero">
+    <div>
+      <p class="pill">Nuevo estreno</p>
+      <h2 class="home__hero-title">Temporada 1 · Episodio 5</h2>
+      <p class="home__hero-text">“Malcolm Babysits” · 22 min</p>
+      <button class="home__hero-cta" type="button">▶ Reproducir ahora</button>
+    </div>
+    <div class="home__hero-thumb"></div>
+  </section>
 
-    <a class="card row" *ngFor="let item of continuar" routerLink="/reproductor" [queryParams]="{ ep: item.id }">
-      <div>
-        <div class="row__title">{{ item.titulo }}</div>
-        <div class="muted small">{{ item.meta }}</div>
-      </div>
-      <div class="row__pill">{{ item.progreso }}%</div>
-    </a>
-  </div>
+  <section>
+    <h3 class="section-title">Accesos rápidos</h3>
+    <div class="home__quick-grid">
+      <a class="home__quick" routerLink="/episodios">
+        <span>📺</span>
+        Episodios
+      </a>
+      <a class="home__quick" routerLink="/personajes">
+        <span>🧑‍🤝‍🧑</span>
+        Personajes
+      </a>
+      <a class="home__quick" routerLink="/reproductor">
+        <span>▶</span>
+        Reproductor
+      </a>
+      <a class="home__quick" routerLink="/perfil">
+        <span>⚙</span>
+        Perfil
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="home__section-header">
+      <h3 class="section-title">Continuar viendo</h3>
+      <span class="muted">Tus últimos avances</span>
+    </div>
+    <div class="home__continue">
+      <a
+        class="home__continue-row"
+        *ngFor="let item of continuar"
+        routerLink="/reproductor"
+        [queryParams]="{ ep: item.id }"
+      >
+        <div>
+          <div class="home__continue-title">{{ item.titulo }}</div>
+          <div class="home__continue-meta">{{ item.meta }}</div>
+        </div>
+        <div class="home__continue-pill">{{ item.progreso }}%</div>
+      </a>
+    </div>
+  </section>
 </div>
-
