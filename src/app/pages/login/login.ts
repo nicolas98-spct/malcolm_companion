@@ -1,24 +1,31 @@
 import { Component, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './login.html',
   styleUrls: ['./login.scss'],
 })
-export class Login {
+export class LoginComponent {
   email = signal('');
   password = signal('');
   loading = signal(false);
 
   constructor(private router: Router) {}
-
-  async entrar() {
+  entrar() {
+  
     this.loading.set(true);
-    await new Promise((r) => setTimeout(r, 250));
-    this.loading.set(false);
-    this.router.navigateByUrl('/inicio');
+
+    setTimeout(() => {
+      this.loading.set(false);
+      this.router.navigate(['/perfil']);
+    }, 250);
+  }
+
+  goRegister() {
+    this.router.navigate(['/register']);
   }
 }
-
