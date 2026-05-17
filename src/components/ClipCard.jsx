@@ -1,0 +1,2 @@
+import ImageFallback from './ImageFallback';
+export default function ClipCard({ clip }) {return <article className="card"><ImageFallback src={clip.thumbnail} alt={clip.titulo} label={clip.titulo} className="thumb"/><h3>{clip.titulo}</h3><p>{clip.descripcion}</p><p>T{clip.temporada} E{clip.episodio} · {clip.duracion_segundos}s</p><a className="btn" href={clip.url_clip} target="_blank" rel="noreferrer">Ver clip</a></article>;}
