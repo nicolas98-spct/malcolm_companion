@@ -1,85 +1,145 @@
 import { Link } from 'react-router-dom';
-import { getUserProfile } from '../api/api';
+import { getCharacters, getUserProfile } from '../api/api';
 import useApi from '../hooks/useApi';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import ImageFallback from '../components/ImageFallback';
 
-function formatEpisodeLike(item) {
-  if (typeof item === 'string') return item;
-  if (!item || typeof item !== 'object') return 'Dato no disponible';
-  const code = item.codigo || item.code || 'Sin código';
-  const title = item.titulo || item.nombre || item.title || 'Sin título';
-  const season = item.temporada ?? item.season;
-  return `${code} · ${title}${season ? ` · Temporada ${season}` : ''}`;
+function normalizeEpisode(item) {
+  if (item && typeof item === 'object') {
+    return {
+      codigo: item.codigo || item.code || 'Episodio',
+      titulo: item.titulo || item.nombre || item.title || 'Contenido',
+      temporada: item.temporada ?? item.season ?? 'Temporada',
+      imagen: item.imagen || item.thumbnail || item.avatar || '',
+    };
+  }
+  return { codigo: 'Episodio', titulo: String(item || 'Contenido'), temporada: 'Temporada', imagen: '' };
 }
 
-function formatBehindScenes(item) {
-  if (typeof item === 'string') return item;
-  if (!item || typeof item !== 'object') return 'Sin título';
-  return item.titulo || item.nombre || item.title || 'Sin título';
+function normalizeBehindScenes(item) {
+  if (item && typeof item === 'object') {
+    return {
+      titulo: item.titulo || item.nombre || item.title || 'Contenido',
+      imagen: item.imagen || item.thumbnail || '',
+    };
+  }
+  return { titulo: String(item || 'Contenido'), imagen: '' };
 }
 
 export default function ProfilePage() {
-  const { data, loading, error } = useApi(getUserProfile, []);
+  const profileApi = useApi(getUserProfile, []);
+  const charactersApi = useApi(getCharacters, []);
 
-  if (loading) return <Loader text="Cargando perfil..." />;
-  if (error) return <ErrorMessage message={error} />;
+  if (profileApi.loading) return <Loader text="Cargando perfil..." />;
+  if (profileApi.error) return <ErrorMessage message={profileApi.error} />;
 
-  const episodesViewed = Array.isArray(data?.episodios_vistos) ? data.episodios_vistos.map(formatEpisodeLike) : [];
-  const favorites = Array.isArray(data?.favoritos) ? data.favoritos.map(formatEpisodeLike) : [];
-  const behindScenes = Array.isArray(data?.detras_de_camaras) ? data.detras_de_camaras.map(formatBehindScenes) : [];
+  const profile = profileApi.data || {};
+
+  const episodesViewed = Array.isArray(profile.episodios_vistos)
+    ? profile.episodios_vistos.map(normalizeEpisode)
+    : [];
+  const favorites = Array.isArray(profile.favoritos) ? profile.favoritos.map(normalizeEpisode) : [];
+  const behindScenes = Array.isArray(profile.detras_de_camaras)
+    ? profile.detras_de_camaras.map(normalizeBehindScenes)
+    : [];
+
+  const characterSource = Array.isArray(charactersApi.data) ? charactersApi.data.slice(0, 3) : [];
 
   return (
-    <section className="mobile-screen">
-      <header className="section-header-red">
-        <div className="row">
-          <Link to="/" className="back-link">← Volver</Link>
-          <h1>Perfil</h1>
+    <section className="profile-mobile-shell">
+      <header className="profile-mobile-header">
+        <Link to="/" className="profile-back">← Perfil</Link>
+        <div className="profile-user-row">
+          <ImageFallback src={profile.avatar} alt="Juan Armando" label="Juan Armando" className="profile-avatar-mobile" />
+          <div>
+            <p>Bienvenido</p>
+            <h1>Juan Armando</h1>
+          </div>
         </div>
       </header>
 
-      <article className="panel mobile-panel profile-shell">
-        <div className="profile-top">
-          <ImageFallback src={data?.avatar} alt={data?.nombre} label="Juan Armando" className="avatar" />
-          <div>
-            <p className="section-kicker">Perfil Companion</p>
-            <h2>Juan Armando</h2>
-          </div>
-        </div>
-
-        <div className="spoiler-toggle">
+      <article className="panel">
+        <div className="spoiler-row">
           <span>Gestión de spoilers</span>
-          <span className={`toggle-badge ${data?.gestion_spoilers ? 'on' : 'off'}`}>{data?.gestion_spoilers ? 'Activado' : 'Desactivado'}</span>
+          <span className={`spoiler-switch ${profile.gestion_spoilers ? 'is-on' : ''}`} aria-hidden="true" />
         </div>
 
-        <section className="panel compact">
-          <h3>Resumen de actividad</h3>
-          <p><strong>Progreso:</strong> {data?.progreso?.porcentaje ?? 0}%</p>
-          <p className="muted">Capítulos vistos: {data?.progreso?.vistos ?? 0}/{data?.progreso?.total ?? 0}</p>
+        <section>
+          <h2 className="profile-section-title">Resumen de actividad</h2>
+          <p className="muted">Episodios vistos</p>
+          <div className="activity-grid">
+            <article className="activity-card-large media-card">
+              <ImageFallback
+                src={episodesViewed[0]?.imagen}
+                alt={episodesViewed[0]?.titulo || 'Episodio'}
+                label={episodesViewed[0]?.titulo || 'Episodio'}
+                className="thumb"
+              />
+              <div className="media-card-title">
+                <strong>{episodesViewed[0]?.codigo || 'Episodio'}</strong>
+                <span>{episodesViewed[0]?.titulo || 'Contenido'}</span>
+                <small>Temporada {episodesViewed[0]?.temporada || 'Temporada'}</small>
+              </div>
+            </article>
+            <div className="activity-card-small">
+              {episodesViewed.slice(1, 3).map((item, idx) => (
+                <article key={`small-ep-${idx}`} className="media-card">
+                  <div className="media-card-title">
+                    <strong>{item.codigo}</strong>
+                    <span>{item.titulo}</span>
+                    <small>Temporada {item.temporada}</small>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </section>
 
-        <section className="detail-block">
-          <h3>Episodios vistos</h3>
-          {episodesViewed.length ? <ul>{episodesViewed.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
+        <section>
+          <h2 className="profile-section-title">Favoritos</h2>
+          <div className="horizontal-media-row">
+            {favorites.length ? favorites.map((item, idx) => (
+              <article key={`fav-${idx}`} className="media-card">
+                <ImageFallback src={item.imagen} alt={item.titulo} label={item.titulo} className="thumb" />
+                <div className="media-card-title">
+                  <strong>{item.codigo}</strong>
+                  <span>{item.titulo}</span>
+                  <small>Temporada {item.temporada}</small>
+                </div>
+              </article>
+            )) : <article className="media-card"><div className="media-card-title"><span>Sin favoritos</span></div></article>}
+          </div>
         </section>
 
-        <section className="detail-block">
-          <h3>Favoritos</h3>
-          {favorites.length ? <ul>{favorites.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
+        <section>
+          <h2 className="profile-section-title">Detrás de cámaras</h2>
+          <div className="horizontal-media-row">
+            {behindScenes.length ? behindScenes.map((item, idx) => (
+              <article key={`bts-${idx}`} className="media-card">
+                <ImageFallback src={item.imagen} alt={item.titulo} label={item.titulo} className="thumb" />
+                <div className="media-card-title"><span>{item.titulo}</span></div>
+              </article>
+            )) : <article className="media-card"><div className="media-card-title"><span>Contenido</span></div></article>}
+          </div>
         </section>
 
-        <section className="detail-block">
-          <h3>Detrás de cámaras</h3>
-          {behindScenes.length ? <ul>{behindScenes.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
-        </section>
-
-        <section className="detail-block">
-          <h3>Vista de los personajes</h3>
-          <div className="mini-cards">
-            {(data?.favoritos || []).slice(0, 3).map((item, idx) => (
-              <article key={`mini-${idx}`} className="mini-card">{formatEpisodeLike(item)}</article>
-            ))}
+        <section>
+          <h2 className="profile-section-title">Vista de los personajes</h2>
+          <div className="character-mini-row">
+            {characterSource.length ? characterSource.map((character) => (
+              <article key={character.id} className="character-mini-card">
+                <ImageFallback src={character.imagen} alt={character.nombre} label={character.nombre} className="profile-avatar-mobile" />
+                <span>{character.nombre}</span>
+              </article>
+            )) : (
+              ['Malcolm', 'Reese', 'Dewey'].map((name) => (
+                <article key={name} className="character-mini-card">
+                  <ImageFallback src="" alt={name} label={name} className="profile-avatar-mobile" />
+                  <span>{name}</span>
+                </article>
+              ))
+            )}
           </div>
         </section>
       </article>
