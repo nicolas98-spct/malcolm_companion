@@ -20,7 +20,7 @@ function formatMoment(item) {
   const title = item.titulo || item.nombre || item.momento || 'Momento destacado';
   const season = item.temporada ?? item.season;
   const episode = item.episodio ?? item.episode;
-  if (season && episode) return `${title} · Temporada ${season}, episodio ${episode}`;
+  if (season && episode) return `${title} · Temporada ${season} · Episodio ${episode}`;
   return title;
 }
 

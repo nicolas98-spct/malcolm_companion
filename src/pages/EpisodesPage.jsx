@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { getEpisodes } from '../api/api';
 import useApi from '../hooks/useApi';
 import Loader from '../components/Loader';
@@ -11,14 +11,19 @@ export default function EpisodesPage() {
   const [search, setSearch] = useState('');
   const [favOnly, setFavOnly] = useState(false);
 
+  const episodes = useMemo(() => (Array.isArray(data) ? data : []), [data]);
+
   if (loading) return <Loader />;
   if (error) return <ErrorMessage message={error} />;
+  if (!episodes.length) return <EmptyState message="No hay episodios para mostrar" />;
 
-  const filtered = (data || []).filter(
-    (item) => item.titulo?.toLowerCase().includes(search.toLowerCase()) && (!favOnly || item.favorito),
-  );
+  const filtered = episodes.filter((item) => {
+    const matchTitle = (item?.titulo || '').toLowerCase().includes(search.toLowerCase());
+    const matchFav = !favOnly || Boolean(item?.favorito);
+    return matchTitle && matchFav;
+  });
 
-  if (!filtered.length) return <EmptyState message="No hay episodios para mostrar" />;
+  if (!filtered.length) return <EmptyState message="No hay episodios que coincidan con tu búsqueda" />;
 
   return (
     <section>

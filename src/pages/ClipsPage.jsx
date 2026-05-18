@@ -7,15 +7,16 @@ import ClipCard from '../components/ClipCard';
 
 export default function ClipsPage() {
   const { data, loading, error } = useApi(getClips, []);
+  const clips = Array.isArray(data) ? data : [];
 
   if (loading) return <Loader />;
   if (error) return <ErrorMessage message={error} />;
-  if (!data?.length) return <EmptyState message="No hay clips destacados" />;
+  if (!clips.length) return <EmptyState message="No hay clips destacados" />;
 
   return (
     <section>
       <h1>Clips destacados</h1>
-      <div className="grid">{data.map((clip) => <ClipCard key={clip.id} clip={clip} />)}</div>
+      <div className="grid">{clips.map((clip) => <ClipCard key={clip.id} clip={clip} />)}</div>
     </section>
   );
 }

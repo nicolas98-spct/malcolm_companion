@@ -36,7 +36,7 @@ export async function getCharacterById(id) {
 }
 
 export async function getEpisodes() {
-  return fetchFirstAvailable(['/episodios', '/episodios/', 'episodios']);
+  return fetchFirstAvailable(['/episodios', '/episodios/']);
 }
 
 export async function getEpisodeById(id) {
