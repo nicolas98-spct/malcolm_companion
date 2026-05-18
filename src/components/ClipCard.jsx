@@ -3,7 +3,7 @@ import ImageFallback from './ImageFallback';
 export default function ClipCard({ clip }) {
   return (
     <article className="card episode-card episode-card--compact">
-      <ImageFallback src={clip?.thumbnail} alt={clip?.titulo} label={clip?.titulo} className="thumb episode-thumb" />
+      <ImageFallback src={clip?.thumbnail} alt={clip?.titulo} label={clip?.titulo} className="image-thumbnail episode-thumb" variant="thumbnail" />
       <div className="episode-content">
         <h3>{clip?.titulo || 'Clip'}</h3>
         <p className="muted clamp-2">{clip?.descripcion || 'Sin descripción disponible.'}</p>

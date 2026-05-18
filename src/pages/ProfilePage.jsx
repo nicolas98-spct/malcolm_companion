@@ -51,7 +51,7 @@ export default function ProfilePage() {
       <header className="profile-mobile-header">
         <Link to="/" className="profile-back">← Perfil</Link>
         <div className="profile-user-row">
-          <ImageFallback src={profile.avatar} alt="Juan Armando" label="Juan Armando" className="profile-avatar-mobile" />
+          <ImageFallback src={profile.avatar} alt="Juan Armando" label="Juan Armando" className="profile-avatar-mobile" variant="avatar" />
           <div>
             <p>Bienvenido</p>
             <h1>Juan Armando</h1>
@@ -74,7 +74,7 @@ export default function ProfilePage() {
                 src={episodesViewed[0]?.imagen}
                 alt={episodesViewed[0]?.titulo || 'Episodio'}
                 label={episodesViewed[0]?.titulo || 'Episodio'}
-                className="thumb"
+                className="image-thumbnail" variant="thumbnail"
               />
               <div className="media-card-title">
                 <strong>{episodesViewed[0]?.codigo || 'Episodio'}</strong>
@@ -101,7 +101,7 @@ export default function ProfilePage() {
           <div className="horizontal-media-row">
             {favorites.length ? favorites.map((item, idx) => (
               <article key={`fav-${idx}`} className="media-card">
-                <ImageFallback src={item.imagen} alt={item.titulo} label={item.titulo} className="thumb" />
+                <ImageFallback src={item.imagen} alt={item.titulo} label={item.titulo} className="image-thumbnail" variant="thumbnail" />
                 <div className="media-card-title">
                   <strong>{item.codigo}</strong>
                   <span>{item.titulo}</span>
@@ -117,7 +117,7 @@ export default function ProfilePage() {
           <div className="horizontal-media-row">
             {behindScenes.length ? behindScenes.map((item, idx) => (
               <article key={`bts-${idx}`} className="media-card">
-                <ImageFallback src={item.imagen} alt={item.titulo} label={item.titulo} className="thumb" />
+                <ImageFallback src={item.imagen} alt={item.titulo} label={item.titulo} className="image-thumbnail" variant="thumbnail" />
                 <div className="media-card-title"><span>{item.titulo}</span></div>
               </article>
             )) : <article className="media-card"><div className="media-card-title"><span>Contenido</span></div></article>}
@@ -128,14 +128,14 @@ export default function ProfilePage() {
           <h2 className="profile-section-title">Vista de los personajes</h2>
           <div className="character-mini-row">
             {characterSource.length ? characterSource.map((character) => (
-              <article key={character.id} className="character-mini-card">
-                <ImageFallback src={character.imagen} alt={character.nombre} label={character.nombre} className="profile-avatar-mobile" />
+              <article key={character.id} className="character-mini-card profile-character-card">
+                <ImageFallback src={character.imagen} alt={character.nombre} label={character.nombre} className="profile-avatar-mobile" variant="avatar" />
                 <span>{character.nombre}</span>
               </article>
             )) : (
               ['Malcolm', 'Reese', 'Dewey'].map((name) => (
-                <article key={name} className="character-mini-card">
-                  <ImageFallback src="" alt={name} label={name} className="profile-avatar-mobile" />
+                <article key={name} className="character-mini-card profile-character-card">
+                  <ImageFallback src="" alt={name} label={name} className="profile-avatar-mobile" variant="avatar" />
                   <span>{name}</span>
                 </article>
               ))

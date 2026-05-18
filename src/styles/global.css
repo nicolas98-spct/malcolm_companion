@@ -109,3 +109,58 @@ input, select { border: 1px solid var(--border); border-radius: 12px; padding: .
 .character-mini-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; }
 .character-mini-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: .55rem .35rem; text-align: center; display: grid; justify-items: center; gap: .35rem; }
 .character-mini-card span { font-size: .78rem; color: #363636; }
+
+/* HOTFIX final de proporciones de imagen */
+.card-image,
+.image-card { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; border-radius: 14px; overflow: hidden; }
+
+.image-thumbnail,
+.image-episode,
+.episode-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.image-avatar,
+.profile-avatar-mobile,
+.profile-character-avatar {
+  width: 68px;
+  height: 68px;
+  min-width: 68px;
+  min-height: 68px;
+  max-width: 68px;
+  max-height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.profile-character-card { padding: .6rem .35rem; }
+.profile-character-card .image-fallback__brand { font-size: .55rem; }
+
+.episode-card--compact { grid-template-columns: 132px 1fr; }
+.episode-card--compact .episode-thumb,
+.episode-card--compact .image-episode { aspect-ratio: 16/9; }
+
+.image-fallback.image-avatar,
+.image-fallback.profile-avatar-mobile,
+.image-fallback.profile-character-avatar {
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.image-fallback.image-thumbnail,
+.image-fallback.image-episode,
+.image-fallback.card-image,
+.image-fallback.image-card {
+  min-height: unset;
+  aspect-ratio: 16/9;
+}
+
+.image-fallback__initial { font-size: clamp(1.2rem, 2.2vw, 2rem); }
+.image-fallback__brand { font-size: .62rem; line-height: 1; }
