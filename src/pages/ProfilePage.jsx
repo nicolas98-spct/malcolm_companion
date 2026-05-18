@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { getUserProfile } from '../api/api';
 import useApi from '../hooks/useApi';
 import Loader from '../components/Loader';
@@ -22,7 +23,7 @@ function formatBehindScenes(item) {
 export default function ProfilePage() {
   const { data, loading, error } = useApi(getUserProfile, []);
 
-  if (loading) return <Loader />;
+  if (loading) return <Loader text="Cargando perfil..." />;
   if (error) return <ErrorMessage message={error} />;
 
   const episodesViewed = Array.isArray(data?.episodios_vistos) ? data.episodios_vistos.map(formatEpisodeLike) : [];
@@ -30,36 +31,58 @@ export default function ProfilePage() {
   const behindScenes = Array.isArray(data?.detras_de_camaras) ? data.detras_de_camaras.map(formatBehindScenes) : [];
 
   return (
-    <section className="panel detail-panel">
-      <p className="section-kicker">Perfil Companion</p>
-      <ImageFallback src={data.avatar} alt={data.nombre} label={data.nombre} className="avatar" />
-      <h1>{data.nombre}</h1>
-      <div className="grid two-col">
-        <article className="panel compact">
-          <h3>Progreso</h3>
-          <p>{data.progreso?.porcentaje}% completado</p>
-          <p className="muted">Capítulos vistos: {data.progreso?.vistos}/{data.progreso?.total}</p>
-        </article>
-        <article className="panel compact">
-          <h3>Preferencias</h3>
-          <p>Gestión spoilers: {data.gestion_spoilers}</p>
-        </article>
-      </div>
+    <section className="mobile-screen">
+      <header className="section-header-red">
+        <div className="row">
+          <Link to="/" className="back-link">← Volver</Link>
+          <h1>Perfil</h1>
+        </div>
+      </header>
 
-      <div className="detail-block">
-        <h3>Episodios vistos</h3>
-        {episodesViewed.length ? <ul>{episodesViewed.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
-      </div>
+      <article className="panel mobile-panel profile-shell">
+        <div className="profile-top">
+          <ImageFallback src={data?.avatar} alt={data?.nombre} label="Juan Armando" className="avatar" />
+          <div>
+            <p className="section-kicker">Perfil Companion</p>
+            <h2>Juan Armando</h2>
+          </div>
+        </div>
 
-      <div className="detail-block">
-        <h3>Favoritos</h3>
-        {favorites.length ? <ul>{favorites.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
-      </div>
+        <div className="spoiler-toggle">
+          <span>Gestión de spoilers</span>
+          <span className={`toggle-badge ${data?.gestion_spoilers ? 'on' : 'off'}`}>{data?.gestion_spoilers ? 'Activado' : 'Desactivado'}</span>
+        </div>
 
-      <div className="detail-block">
-        <h3>Detrás de cámaras</h3>
-        {behindScenes.length ? <ul>{behindScenes.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
-      </div>
+        <section className="panel compact">
+          <h3>Resumen de actividad</h3>
+          <p><strong>Progreso:</strong> {data?.progreso?.porcentaje ?? 0}%</p>
+          <p className="muted">Capítulos vistos: {data?.progreso?.vistos ?? 0}/{data?.progreso?.total ?? 0}</p>
+        </section>
+
+        <section className="detail-block">
+          <h3>Episodios vistos</h3>
+          {episodesViewed.length ? <ul>{episodesViewed.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
+        </section>
+
+        <section className="detail-block">
+          <h3>Favoritos</h3>
+          {favorites.length ? <ul>{favorites.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
+        </section>
+
+        <section className="detail-block">
+          <h3>Detrás de cámaras</h3>
+          {behindScenes.length ? <ul>{behindScenes.map((item, idx) => <li key={`${item}-${idx}`}>{item}</li>)}</ul> : <p className="muted">Sin datos</p>}
+        </section>
+
+        <section className="detail-block">
+          <h3>Vista de los personajes</h3>
+          <div className="mini-cards">
+            {(data?.favoritos || []).slice(0, 3).map((item, idx) => (
+              <article key={`mini-${idx}`} className="mini-card">{formatEpisodeLike(item)}</article>
+            ))}
+          </div>
+        </section>
+      </article>
     </section>
   );
 }
