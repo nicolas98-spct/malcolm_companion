@@ -1,12 +1,25 @@
 const BASE_URL = 'https://mock.apidog.com/m1/1262810-1260527-default';
 
 async function fetchJson(path, options = {}) {
-  const url = `${BASE_URL}${path}`;
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  const url = `${BASE_URL}${normalizedPath}`;
   const response = await fetch(url, options);
   if (!response.ok) {
-    throw new Error(`Error ${response.status}: no se pudo obtener ${path}`);
+    throw new Error(`Error ${response.status}: no se pudo obtener ${normalizedPath}`);
   }
   return response.json();
+}
+
+async function fetchFirstAvailable(paths) {
+  let lastError = null;
+  for (const path of paths) {
+    try {
+      return await fetchJson(path);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+  throw lastError || new Error('No se pudo obtener el recurso solicitado.');
 }
 
 const normalizeId = (value) => String(value);
@@ -23,12 +36,17 @@ export async function getCharacterById(id) {
 }
 
 export async function getEpisodes() {
-  return fetchJson('/episodios');
+  return fetchFirstAvailable(['/episodios', '/episodios/', 'episodios']);
 }
 
 export async function getEpisodeById(id) {
-  const detail = await fetchJson(`/episodios/${id}`);
-  if (detail && normalizeId(detail.id) === normalizeId(id)) return detail;
+  try {
+    const detail = await fetchFirstAvailable([`/episodios/${id}`, `/episodios/${id}/`]);
+    if (detail && normalizeId(detail.id) === normalizeId(id)) return detail;
+  } catch {
+    // fallback a listado
+  }
+
   const list = await getEpisodes();
   return list.find((item) => normalizeId(item.id) === normalizeId(id)) ?? null;
 }
@@ -38,9 +56,5 @@ export async function getClips() {
 }
 
 export async function getUserProfile() {
-  try {
-    return await fetchJson('/usuario');
-  } catch {
-    return fetchJson('/usuario/');
-  }
+  return fetchFirstAvailable(['/usuario', '/usuario/']);
 }
