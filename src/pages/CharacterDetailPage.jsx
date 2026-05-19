@@ -5,6 +5,7 @@ import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import EmptyState from '../components/EmptyState';
 import ImageFallback from '../components/ImageFallback';
+import { getCharacterImage } from '../utils/localImages';
 
 function formatRelation(item) {
   if (typeof item === 'string') return item;
@@ -38,7 +39,7 @@ export default function CharacterDetailPage() {
   return (
     <section className="panel detail-panel">
       <p className="section-kicker">Ficha de personaje</p>
-      <ImageFallback src={data.imagen} alt={data.nombre} label={data.nombre} className="hero-img" />
+      <ImageFallback src={getCharacterImage(data.nombre) || data.imagen} alt={data.nombre} label={data.nombre} className="hero-img" />
       <h1>{data.nombre}</h1>
       <p>{data.descripcion}</p>
       <p className="muted">

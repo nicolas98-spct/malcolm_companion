@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { getCharacters, getUserProfile } from '../api/api';
+import { getBehindScenesImage, getCharacterImage, getEpisodeImage, getMemeImage, getProfileImage } from '../utils/localImages';
 import useApi from '../hooks/useApi';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
@@ -51,7 +52,7 @@ export default function ProfilePage() {
       <header className="profile-mobile-header">
         <Link to="/" className="profile-back">← Perfil</Link>
         <div className="profile-user-row">
-          <ImageFallback src={profile.avatar} alt="Juan Armando" label="Juan Armando" className="profile-avatar-mobile" variant="avatar" />
+          <ImageFallback src={getProfileImage()} alt="Juan Armando" label="Juan Armando" className="profile-avatar-mobile" variant="avatar" />
           <div>
             <p>Bienvenido</p>
             <h1>Juan Armando</h1>
@@ -71,7 +72,7 @@ export default function ProfilePage() {
           <div className="activity-grid">
             <article className="activity-card-large media-card">
               <ImageFallback
-                src={episodesViewed[0]?.imagen}
+                src={getEpisodeImage(episodesViewed[0]?.titulo, episodesViewed[0]?.codigo) || episodesViewed[0]?.imagen}
                 alt={episodesViewed[0]?.titulo || 'Episodio'}
                 label={episodesViewed[0]?.titulo || 'Episodio'}
                 className="image-thumbnail" variant="thumbnail"
@@ -101,7 +102,7 @@ export default function ProfilePage() {
           <div className="horizontal-media-row">
             {favorites.length ? favorites.map((item, idx) => (
               <article key={`fav-${idx}`} className="media-card">
-                <ImageFallback src={item.imagen} alt={item.titulo} label={item.titulo} className="image-thumbnail" variant="thumbnail" />
+                <ImageFallback src={getEpisodeImage(item.titulo, item.codigo) || item.imagen} alt={item.titulo} label={item.titulo} className="image-thumbnail" variant="thumbnail" />
                 <div className="media-card-title">
                   <strong>{item.codigo}</strong>
                   <span>{item.titulo}</span>
@@ -117,7 +118,7 @@ export default function ProfilePage() {
           <div className="horizontal-media-row">
             {behindScenes.length ? behindScenes.map((item, idx) => (
               <article key={`bts-${idx}`} className="media-card">
-                <ImageFallback src={item.imagen} alt={item.titulo} label={item.titulo} className="image-thumbnail" variant="thumbnail" />
+                <ImageFallback src={getEpisodeImage(item.titulo, item.codigo) || item.imagen} alt={item.titulo} label={item.titulo} className="image-thumbnail" variant="thumbnail" />
                 <div className="media-card-title"><span>{item.titulo}</span></div>
               </article>
             )) : <article className="media-card"><div className="media-card-title"><span>Contenido</span></div></article>}
@@ -129,7 +130,7 @@ export default function ProfilePage() {
           <div className="character-mini-row">
             {characterSource.length ? characterSource.map((character) => (
               <article key={character.id} className="character-mini-card profile-character-card">
-                <ImageFallback src={character.imagen} alt={character.nombre} label={character.nombre} className="profile-avatar-mobile" variant="avatar" />
+                <ImageFallback src={getCharacterImage(character.nombre) || character.imagen} alt={character.nombre} label={character.nombre} className="profile-avatar-mobile" variant="avatar" />
                 <span>{character.nombre}</span>
               </article>
             )) : (
@@ -142,6 +143,18 @@ export default function ProfilePage() {
             )}
           </div>
         </section>
+        <section>
+          <h2 className="profile-section-title">Contenido extra</h2>
+          <div className="horizontal-media-row">
+            {[0, 1, 2].map((idx) => (
+              <article key={`meme-${idx}`} className="media-card">
+                <ImageFallback src={getMemeImage(idx)} alt={`Meme ${idx + 1}`} label={`Meme ${idx + 1}`} className="image-thumbnail" variant="thumbnail" />
+                <div className="media-card-title"><span>Meme Dewey {idx + 1}</span></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
       </article>
     </section>
   );

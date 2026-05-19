@@ -1,9 +1,11 @@
 import ImageFallback from './ImageFallback';
+import { getClipImage } from '../utils/localImages';
 
 export default function ClipCard({ clip }) {
+  const imageSrc = getClipImage(clip?.titulo) || clip?.thumbnail;
   return (
     <article className="card episode-card episode-card--compact">
-      <ImageFallback src={clip?.thumbnail} alt={clip?.titulo} label={clip?.titulo} className="image-thumbnail episode-thumb" variant="thumbnail" />
+      <ImageFallback src={imageSrc} alt={clip?.titulo} label={clip?.titulo} className="image-thumbnail episode-thumb" variant="thumbnail" />
       <div className="episode-content">
         <h3>{clip?.titulo || 'Clip'}</h3>
         <p className="muted clamp-2">{clip?.descripcion || 'Sin descripción disponible.'}</p>

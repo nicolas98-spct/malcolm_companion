@@ -164,3 +164,12 @@ input, select { border: 1px solid var(--border); border-radius: 12px; padding: .
 
 .image-fallback__initial { font-size: clamp(1.2rem, 2.2vw, 2rem); }
 .image-fallback__brand { font-size: .62rem; line-height: 1; }
+
+.login-page { min-height: 78vh; display: grid; place-items: center; background-size: cover; background-position: center; border-radius: 18px; }
+.login-card { background: #fff; border-radius: 18px; padding: 1.1rem; width: min(390px, 92%); box-shadow: 0 12px 30px rgba(0,0,0,.18); }
+.login-logo { width: 160px; display: block; margin: 0 auto .6rem; }
+.landing-logo { width: 150px; margin-bottom: .55rem; }
+.progress-track { height: 10px; width: 100%; border-radius: 999px; background: #f1f1f1; overflow: hidden; }
+.progress-bar { height: 100%; background: #ffc107; }
+
+.image-hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 14px; }

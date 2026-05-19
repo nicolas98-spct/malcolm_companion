@@ -5,6 +5,7 @@ import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import EmptyState from '../components/EmptyState';
 import ImageFallback from '../components/ImageFallback';
+import { getEpisodeImage } from '../utils/localImages';
 
 export default function EpisodeDetailPage() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ export default function EpisodeDetailPage() {
   return (
     <section className="panel detail-panel">
       <p className="section-kicker">Detalle de episodio</p>
-      <ImageFallback src={data.imagen} alt={data.titulo} label={data.titulo} className="hero-img" />
+      <ImageFallback src={getEpisodeImage(data.titulo, data.codigo) || data.imagen} alt={data.titulo} label={data.titulo} className="hero-img" />
       <h1>{data.codigo ? `${data.codigo} · ` : ''}{data.titulo}</h1>
       <p>{data.descripcion}</p>
       <p className="muted">

@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import ImageFallback from './ImageFallback';
-import { getEpisodeLocalImage } from '../utils/imageMap';
+import { getEpisodeImage } from '../utils/localImages';
 
 export default function EpisodeCard({ episode, compact = false }) {
-  const localImage = getEpisodeLocalImage({ titulo: episode?.titulo, codigo: episode?.codigo });
+  const imageSrc = getEpisodeImage(episode?.titulo, episode?.codigo) || episode?.imagen;
 
   return (
     <article className={`card episode-card ${compact ? 'episode-card--compact' : ''}`}>
-      <ImageFallback src={localImage || episode?.imagen} alt={episode?.titulo} label={episode?.titulo} className="episode-thumb" variant="episode" />
+      <ImageFallback src={imageSrc} alt={episode?.titulo} label={episode?.titulo} className="episode-thumb" variant="episode" />
       <div className="episode-content">
         <h3>{episode?.titulo || 'Episodio'}</h3>
         <p className="muted clamp-2">{episode?.descripcion || 'Sin descripción disponible.'}</p>
